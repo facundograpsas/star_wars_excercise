@@ -31,13 +31,26 @@ class _CharsListState extends State<CharsList> {
                     width: 200,
                     height: 300,
                     child: Center(
-                      child: Text(
-                        state.errorMessage,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                            color: AppColors.red,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            state.errorMessage,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                                color: AppColors.red,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 24),
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.all(15.0),
+                            child: Icon(
+                              Icons.settings,
+                              size: 50,
+                              color: AppColors.amber,
+                            ),
+                          )
+                        ],
                       ),
                     )));
           case CharacterStatus.success:
