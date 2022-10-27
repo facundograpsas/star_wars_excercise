@@ -62,6 +62,7 @@ class CharactersBloc extends Bloc<CharacterEvent, CharacterState> {
     Emitter<CharacterState> emit,
   ) async {
     if (await repository.isConnected()) {
+      emit(state.copyWith(status: CharacterStatus.loading, page: state.page));
       await _fetchCharacters(emit);
     } else {
       emit(state.copyWith(

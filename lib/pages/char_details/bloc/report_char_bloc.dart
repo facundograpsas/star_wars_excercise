@@ -26,7 +26,9 @@ class ReportCharBloc extends Bloc<ReportCharEvent, ReportCharState> {
     emit(state.copyWith(status: ReportCharStatus.loading));
     if (await repository.isConnected()) {
       var response = await repository.createReport(Report(
-          userId: 1, characterName: event.character.name!, dateTime: '12'));
+          userId: 1,
+          characterName: event.character.name!,
+          dateTime: DateTime.now().toString()));
       response.fold(
           (failure) => emit(state.copyWith(
               status: ReportCharStatus.failure, message: failure.message)),
