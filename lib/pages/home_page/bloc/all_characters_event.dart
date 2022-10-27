@@ -10,8 +10,3 @@ class InitialFetch extends CharacterEvent {}
 class FetchNextPage extends CharacterEvent {}
 
 class FetchPreviousPage extends CharacterEvent {}
-
-class IsConnected extends CharacterEvent {
-  final bool connection;
-  IsConnected({required this.connection});
-}

@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:star_wars_excercise/api/api.dart';
 import 'package:star_wars_excercise/pages/char_details/bloc/char_details_bloc.dart';
 import 'package:star_wars_excercise/pages/char_details/bloc/report_char_bloc.dart';
@@ -8,9 +10,14 @@ import 'package:star_wars_excercise/pages/home_page/bloc/all_characters_bloc.dar
 import 'package:star_wars_excercise/pages/home_page/bloc/all_characters_event.dart';
 import 'package:star_wars_excercise/pages/home_page/home_screen.dart';
 import 'package:star_wars_excercise/pages/menu_screen/bloc/connection_bloc.dart';
+import 'package:star_wars_excercise/pages/menu_screen/bloc/connection_event.dart';
+import 'package:star_wars_excercise/repository/sw_repository.dart';
+import 'package:star_wars_excercise/utils.dart';
 
-void main() {
-  // Bloc.observer = SimpleBlocObserver();
+void main() async {
+  await Hive.initFlutter();
+  await initDB();
+
   runApp(const MyApp());
 }
 
@@ -21,15 +28,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_) => ConnectionBloc()),
         BlocProvider(
-            create: (_) =>
-                CharactersBloc(api: RestClient(Dio()))..add(InitialFetch())),
-        BlocProvider(create: (_) => CharDetailsBloc(api: RestClient(Dio()))),
+            create: (_) => ConnectionBloc(
+                repository: SW_repositoryImpl(api: RestClient(Dio())))
+              ..add(TurnInit())),
+        BlocProvider(
+            create: (_) => CharactersBloc(
+                api: RestClient(Dio()),
+                repository: SW_repositoryImpl(api: RestClient(Dio())))
+              ..add(InitialFetch())),
+        BlocProvider(
+            create: (_) => CharDetailsBloc(
+                repository: SW_repositoryImpl(api: RestClient(Dio())))),
         BlocProvider(
             create: (_) => ReportCharBloc(
-                api: RestClient(Dio(),
-                    baseUrl: 'https://jsonplaceholder.typicode.com')))
+                repository: SW_repositoryImpl(
+                    api: RestClient(Dio(),
+                        baseUrl: 'https://jsonplaceholder.typicode.com'))))
       ],
       child: MaterialApp(
           title: 'Report Invaders',
@@ -40,7 +55,7 @@ class MyApp extends StatelessWidget {
             fontFamily: 'Play',
             backgroundColor: Colors.black,
           ),
-          home: HomeScreen(title: 'Report Invaders')),
+          home: const HomeScreen(title: 'Report Invaders')),
     );
   }
 }

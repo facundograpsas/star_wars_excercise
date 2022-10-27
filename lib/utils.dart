@@ -1,3 +1,6 @@
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 String formatPlanet(String planetUrl) {
   var splittedString = planetUrl.split('/');
   return splittedString[splittedString.length - 2].toString();
@@ -17,4 +20,11 @@ List<String> formatVehicles(List<String> vehicleUrl) {
     return splittedString[splittedString.length - 2].toString();
   }).toList();
   return formattedVehicle;
+}
+
+Future<void> initDB() async {
+  var box = await Hive.openBox('connection');
+  if (!box.containsKey('isConnected')) {
+    box.put('isConnected', true);
+  }
 }

@@ -8,3 +8,5 @@ abstract class ConnectionEvent extends Equatable {
 class TurnOn extends ConnectionEvent {}
 
 class TurnOff extends ConnectionEvent {}
+
+class TurnInit extends ConnectionEvent {}

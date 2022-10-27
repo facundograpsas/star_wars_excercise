@@ -1,5 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:star_wars_excercise/constants/colors.dart';
 
 class DetailItem extends StatelessWidget {
   const DetailItem(
@@ -27,7 +28,7 @@ class DetailItem extends StatelessWidget {
           if (!animated)
             Text(info,
                 style: const TextStyle(
-                    color: Colors.red,
+                    color: AppColors.red,
                     fontSize: 16,
                     fontWeight: FontWeight.bold))
           else
@@ -38,7 +39,7 @@ class DetailItem extends StatelessWidget {
                   TyperAnimatedText(info,
                       speed: const Duration(milliseconds: 500),
                       textStyle: const TextStyle(
-                          color: Colors.red,
+                          color: AppColors.red,
                           fontSize: 16,
                           fontWeight: FontWeight.bold))
                 ]),

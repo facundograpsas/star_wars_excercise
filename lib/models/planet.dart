@@ -1,26 +1,26 @@
 class Planet {
   Planet({
     required this.name,
-    required this.rotationPeriod,
-    required this.orbitalPeriod,
-    required this.diameter,
-    required this.climate,
-    required this.gravity,
-    required this.terrain,
-    required this.surfaceWater,
-    required this.population,
-    required this.residents,
+    this.rotationPeriod,
+    this.orbitalPeriod,
+    this.diameter,
+    this.climate,
+    this.gravity,
+    this.terrain,
+    this.surfaceWater,
+    this.population,
+    this.residents,
   });
   late final String name;
-  late final String rotationPeriod;
-  late final String orbitalPeriod;
-  late final String diameter;
-  late final String climate;
-  late final String gravity;
-  late final String terrain;
-  late final String surfaceWater;
-  late final String population;
-  late final List<String> residents;
+  late final String? rotationPeriod;
+  late final String? orbitalPeriod;
+  late final String? diameter;
+  late final String? climate;
+  late final String? gravity;
+  late final String? terrain;
+  late final String? surfaceWater;
+  late final String? population;
+  late final List<String>? residents;
 
   Planet.fromJson(Map<String, dynamic> json) {
     name = json['name'];

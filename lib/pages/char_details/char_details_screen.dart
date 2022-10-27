@@ -1,7 +1,6 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:star_wars_excercise/api/api.dart';
+import 'package:star_wars_excercise/constants/strings.dart';
 import 'package:star_wars_excercise/models/character.dart';
 import 'package:star_wars_excercise/pages/char_details/bloc/char_details_bloc.dart';
 import 'package:star_wars_excercise/pages/char_details/bloc/char_details_event.dart';
@@ -10,7 +9,8 @@ import 'package:star_wars_excercise/pages/char_details/bloc/report_char_bloc.dar
 import 'package:star_wars_excercise/pages/char_details/bloc/report_char_state.dart';
 import 'package:star_wars_excercise/pages/char_details/widgets/char_details.dart';
 import 'package:star_wars_excercise/pages/char_details/widgets/report_button.dart';
-import 'package:star_wars_excercise/pages/home_page/bloc/all_characters_bloc.dart';
+
+import '../../constants/colors.dart';
 
 class CharacterDetailsScreen extends StatefulWidget {
   const CharacterDetailsScreen({Key? key, required this.character})
@@ -24,7 +24,6 @@ class CharacterDetailsScreen extends StatefulWidget {
 class _CharacterDetailsScreenState extends State<CharacterDetailsScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     context
         .read<CharDetailsBloc>()
@@ -56,13 +55,10 @@ class _CharacterDetailsScreenState extends State<CharacterDetailsScreen> {
                 child: BlocConsumer<ReportCharBloc, ReportCharState>(
                   listener: (context, state) {
                     if (state.status == ReportCharStatus.success) {
-                      showMaterialBanner(context,
-                          'Reporte de avistamiento exitoso', Icons.check);
+                      showMaterialBanner(context, REPORTE_SUCCESS, Icons.check);
                     } else if (state.status == ReportCharStatus.failure) {
                       showMaterialBanner(
-                          context,
-                          'Hubo un problema al procesar el reporte.',
-                          Icons.check);
+                          context, state.message, Icons.dangerous);
                     }
                   },
                   builder: ((context, state) {
@@ -84,10 +80,10 @@ class _CharacterDetailsScreenState extends State<CharacterDetailsScreen> {
     ScaffoldMessenger.of(context).showMaterialBanner(MaterialBanner(
         content: Text(message),
         leading: Icon(icon),
-        backgroundColor: Colors.amber,
+        backgroundColor: AppColors.amber,
         actions: [
           TextButton(
-            child: const Text('Ignorar'),
+            child: const Text(REPORTE_IGNORAR),
             onPressed: () =>
                 ScaffoldMessenger.of(context).hideCurrentMaterialBanner(),
           )

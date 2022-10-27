@@ -22,7 +22,8 @@ class CharDetailsState extends Equatable {
   final Character? character;
 
   CharDetailsState copyWith(
-      {CharacterDetailsStatus? status,
+      {bool? connection,
+      CharacterDetailsStatus? status,
       Character? character,
       Planet? planet,
       List<Starship>? starships,

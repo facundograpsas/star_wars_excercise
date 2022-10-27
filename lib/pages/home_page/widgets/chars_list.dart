@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:star_wars_excercise/pages/home_page/bloc/all_characters_bloc.dart';
 import 'package:star_wars_excercise/pages/home_page/bloc/all_characters_state.dart';
 import 'package:star_wars_excercise/pages/home_page/widgets/char_list_item.dart';
+import '../../../constants/colors.dart';
 import 'char_list_item.dart';
 
 class CharsList extends StatefulWidget {
@@ -21,7 +22,24 @@ class _CharsListState extends State<CharsList> {
       builder: (context, state) {
         switch (state.status) {
           case CharacterStatus.failure:
-            return const Center(child: Text('Failed to fetch enemies'));
+            return Center(
+                child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(color: AppColors.white)),
+                    width: 200,
+                    height: 300,
+                    child: Center(
+                      child: Text(
+                        state.errorMessage,
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                            color: AppColors.red,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24),
+                      ),
+                    )));
           case CharacterStatus.success:
             if (state.characters.isEmpty) {
               return const Center(child: Text('No enemies'));
@@ -38,7 +56,7 @@ class _CharsListState extends State<CharsList> {
           case CharacterStatus.loading:
             return const Center(
                 child: CircularProgressIndicator(
-              color: Colors.red,
+              color: AppColors.red,
             ));
         }
       },

@@ -1,11 +1,7 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:star_wars_excercise/api/api.dart';
-import 'package:star_wars_excercise/pages/home_page/bloc/all_characters_bloc.dart';
-import 'package:star_wars_excercise/pages/home_page/bloc/all_characters_event.dart';
+import 'package:star_wars_excercise/constants/colors.dart';
+import 'package:star_wars_excercise/constants/strings.dart';
 import 'package:star_wars_excercise/pages/menu_screen/bloc/connection_bloc.dart';
 import 'package:star_wars_excercise/pages/menu_screen/bloc/connection_event.dart';
 import 'package:star_wars_excercise/pages/menu_screen/bloc/connection_state.dart';
@@ -21,7 +17,13 @@ class MenuScreen extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: const [
-            Text('Conexión:'),
+            Text(
+              CONEXION,
+              style: TextStyle(
+                  color: AppColors.red,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18),
+            ),
             ConnectionSwitch(),
           ],
         ),
@@ -40,16 +42,11 @@ class ConnectionSwitch extends StatefulWidget {
 class _ConnectionSwitchState extends State<ConnectionSwitch> {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ConnectionBloc, AppConnectionState>(
-      listener: (context, state) {
-        context
-            .read<CharactersBloc>()
-            .add(IsConnected(connection: state.connection));
-      },
+    return BlocBuilder<ConnectionBloc, AppConnectionState>(
       builder: ((context, state) {
         return Switch(
           value: state.connection,
-          activeColor: Colors.red,
+          activeColor: AppColors.red,
           onChanged: (bool value) {
             if (value) {
               context.read<ConnectionBloc>().add(TurnOn());

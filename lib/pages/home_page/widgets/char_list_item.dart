@@ -1,5 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:star_wars_excercise/constants/colors.dart';
+import 'package:star_wars_excercise/constants/strings.dart';
 
 import '../../../models/character.dart';
 import '../../char_details/char_details_screen.dart';
@@ -15,7 +16,7 @@ class CharListItem extends StatelessWidget {
       elevation: 2,
       color: Colors.black,
       shape: RoundedRectangleBorder(
-        side: const BorderSide(color: Colors.white70, width: 1),
+        side: const BorderSide(color: AppColors.whiteCardBoder, width: 1),
         borderRadius: BorderRadius.circular(10),
       ),
       child: SizedBox(
@@ -23,7 +24,7 @@ class CharListItem extends StatelessWidget {
         child: Material(
           color: Colors.transparent,
           child: InkWell(
-            splashColor: Colors.red,
+            splashColor: AppColors.red,
             onTap: () {
               Navigator.of(context).push(_createRoute(character));
             },
@@ -34,14 +35,14 @@ class CharListItem extends StatelessWidget {
                 Column(
                   children: [
                     const Text(
-                      'Nombre',
+                      NOMBRE,
                       style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                     Text(
                       character.name!,
                       style: const TextStyle(
                           fontSize: 20,
-                          color: Color.fromARGB(255, 190, 40, 29),
+                          color: AppColors.red,
                           fontWeight: FontWeight.bold),
                     ),
                   ],
@@ -49,14 +50,14 @@ class CharListItem extends StatelessWidget {
                 Column(
                   children: [
                     const Text(
-                      'Género',
-                      style: TextStyle(fontSize: 16, color: Colors.white),
+                      GENERO,
+                      style: TextStyle(fontSize: 16, color: AppColors.white),
                     ),
                     Text(
                       character.gender!,
                       style: const TextStyle(
                           fontSize: 20,
-                          color: Color.fromARGB(255, 165, 28, 18),
+                          color: AppColors.red,
                           fontWeight: FontWeight.bold),
                     ),
                   ],

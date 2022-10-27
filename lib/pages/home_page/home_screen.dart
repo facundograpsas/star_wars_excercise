@@ -1,13 +1,8 @@
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:star_wars_excercise/pages/home_page/bloc/all_characters_bloc.dart';
+import 'package:star_wars_excercise/constants/strings.dart';
 import 'package:star_wars_excercise/pages/home_page/widgets/pagination.dart';
-import 'package:star_wars_excercise/pages/menu_screen/bloc/connection_bloc.dart';
-import 'package:star_wars_excercise/pages/menu_screen/bloc/connection_state.dart';
-import '../../api/api.dart';
+import '../../constants/colors.dart';
 import '../menu_screen/menu_screen.dart';
-import 'bloc/all_characters_event.dart';
 import 'widgets/chars_list.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -36,8 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Row(
           children: const [
             Text(
-              'Report Invaders',
-              style: TextStyle(color: Colors.amber),
+              TITULO,
+              style: TextStyle(color: AppColors.amber),
             ),
             Padding(
               padding: EdgeInsets.all(8.0),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:star_wars_excercise/constants/colors.dart';
+import 'package:star_wars_excercise/constants/strings.dart';
 
 import '../bloc/all_characters_bloc.dart';
 import '../bloc/all_characters_event.dart';
@@ -23,7 +25,7 @@ class _PaginationState extends State<Pagination> {
       return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
-          color: Colors.black,
+          color: AppColors.black,
           height: 50,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -39,10 +41,11 @@ class _PaginationState extends State<Pagination> {
                           scrollToTop();
                         },
                         style: ElevatedButton.styleFrom(
-                            primary: const Color.fromARGB(255, 160, 41, 33)),
+                            backgroundColor: AppColors.red),
                         child: const Text(
-                          'Previous',
-                          style: TextStyle(fontSize: 20, color: Colors.white),
+                          PREVIOUS,
+                          style:
+                              TextStyle(fontSize: 20, color: AppColors.white),
                         ),
                       )),
                     )
@@ -51,7 +54,7 @@ class _PaginationState extends State<Pagination> {
                   child: Center(
                       child: Text(
                 (state.page).toString(),
-                style: const TextStyle(color: Colors.white, fontSize: 20),
+                style: const TextStyle(color: AppColors.white, fontSize: 20),
               ))),
               state.page < 9
                   ? Expanded(
@@ -62,12 +65,12 @@ class _PaginationState extends State<Pagination> {
                             scrollToTop();
                           },
                           style: ElevatedButton.styleFrom(
-                              primary: const Color.fromARGB(255, 160, 41, 33)),
+                              backgroundColor: AppColors.red),
                           child: const Text(
-                            'Next',
+                            NEXT,
                             style: TextStyle(
                                 fontSize: 20,
-                                color: Colors.white,
+                                color: AppColors.white,
                                 fontFamily: 'Play'),
                           ),
                         ),
